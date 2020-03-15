@@ -1,3 +1,8 @@
+'''
+Name: Sidharth Banerjee
+ID  : 1001622703
+'''
+
 import sys
 from socket import *
 
@@ -18,12 +23,14 @@ elif len(sys.argv) is 4:
 clientSocket = socket(AF_INET, SOCK_STREAM)
 clientSocket.connect((serverName, serverPort))
 
-request = 'GET http://' + serverName + ':' + str(serverPort) + '/' + filename 
-print(request)
-clientSocket.send(request.encode())
+request = 'GET /' + filename + ' HTTP/1.1\n\r'
+header1 = 'TE: deflate,gzip;q=0.3\n\r'
+header2 = 'Connection: TE, closeHost: ' + serverName + ':' + str(serverPort)+ '\n\r'
+header3 = 'User-Agent: lwp-request/6.39 libwww-perl/6.39\n\r\r'
+
+message = request+header1+header2+header3
+clientSocket.send(message.encode())
 
 
-modifiedSentence = clientSocket.recv(1024)
-print (modifiedSentence.decode())
-
-clientSocket.close()
+reply = clientSocket.recv(1024)
+print(reply.decode())

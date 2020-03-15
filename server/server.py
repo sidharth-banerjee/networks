@@ -1,3 +1,8 @@
+'''
+Name: Sidharth Banerjee
+ID  : 1001622703
+'''
+
 import sys
 import threading
 from socket import *
@@ -37,7 +42,7 @@ while 1:
         outputdata = returnFileData(filename)
 
         # send HTTP header line into socket
-        connectionSocket.send('\nHTTP/1.x 200 OK\n'.encode())
+        connectionSocket.send('\nHTTP/1.1 200 OK\n\n'.encode())
 
         for i in range (0, len(outputdata)):
                 connectionSocket.send(outputdata[i].encode())
@@ -45,7 +50,7 @@ while 1:
         connectionSocket.close()
 
         print('\nRequest Details:\n')
-        print(message.decode().strip('\r\n'))
+        print(message.decode())
         print('File Sent\n')
     
     except IOError:
