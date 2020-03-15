@@ -4,10 +4,10 @@ ID  : 1001622703
 '''
 
 import sys
-from socket import *
+from socket import socket, AF_INET, SOCK_STREAM
 
 serverName = sys.argv[1]
-serverPort = 12000
+serverPort = 8080
 filename = 'index.html'
 
 if len(sys.argv) is 3:

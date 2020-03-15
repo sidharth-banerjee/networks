@@ -5,7 +5,7 @@ ID  : 1001622703
 
 import sys
 import threading
-from socket import *
+from socket import socket, AF_INET, SOCK_STREAM
 
 def returnFileData(filepath):
     if 'html' not in filepath.decode():
@@ -20,8 +20,7 @@ def returnFileData(filepath):
 
     return outputdata
 
-
-serverPort = 12000 # default
+serverPort = 8080 # default
 if len(sys.argv) > 1:
     serverPort = int(sys.argv[1])
 
