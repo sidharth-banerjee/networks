@@ -29,6 +29,7 @@ header2 = 'Connection: TE, closeHost: ' + serverName + ':' + str(serverPort)+ '\
 header3 = 'User-Agent: lwp-request/6.39 libwww-perl/6.39\n\r\r'
 
 message = request+header1+header2+header3
+print(message)
 clientSocket.send(message.encode())
 
 
