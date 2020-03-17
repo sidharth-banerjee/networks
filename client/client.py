@@ -31,6 +31,5 @@ header3 = 'User-Agent: lwp-request/6.39 libwww-perl/6.39\n\r\r'
 message = request+header1+header2+header3
 clientSocket.send(message.encode())
 
-
 reply = clientSocket.recv(1024)
 print(reply.decode())
