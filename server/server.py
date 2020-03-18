@@ -10,7 +10,7 @@ from socket import SOL_SOCKET, SO_REUSEADDR
 from socket import socket, AF_INET, SOCK_STREAM
 
 def returnFileData(filepath):
-    if 'html' not in filepath.decode():
+    if 'htm' not in filepath.decode():
         f = open('default.html')
         outputdata = f.read()
         f.close()
@@ -34,12 +34,12 @@ class ClientThread(Thread):
             message = self.connectionSocket.recv(1024)
 
             filename = message.split()[1]
-
+            
             outputdata = returnFileData(filename)
 
             # send HTTP header line into socket
             self.connectionSocket.send('\nHTTP/1.1 200 OK\n\n'.encode())
-
+            
             for i in range (0, len(outputdata)):
                 self.connectionSocket.send(outputdata[i].encode())
 
@@ -68,5 +68,5 @@ while True:
     serverSocket.listen(5)
     (connectionSocket, (ip, port)) = serverSocket.accept()
     t = ClientThread(connectionSocket, ip, port)
+    t.setDaemon(True)
     t.start()
-    t.join()
